@@ -34,7 +34,7 @@
 }
 
     function checkStatusUpdates() {
-    fetch('check_status_checkbox.php')
+  fetch('check_status_checkbox.php', { cache: 'no-store' })
         .then(response => response.json())
         .then(data => {
             if (window.lastStatusChecksum !== data.checksum) {
@@ -45,7 +45,11 @@
         .catch(console.error);
 }
 
-setInterval(checkStatusUpdates, 5000);
+checkStatusUpdates();
+setInterval(checkStatusUpdates, 500);
+
+
+
 	function STATUS_RESPONSABLE_EVENTO(RESPONSABLE_EVENTO_id){
 
 

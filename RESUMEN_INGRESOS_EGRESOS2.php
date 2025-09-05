@@ -21,6 +21,16 @@ function refreshSection() {
         });
 }
 
+
+
+// Escucha mensajes del controlador para recargar este resumen
+const resumenChannel = new BroadcastChannel('resumen_actualizacion');
+resumenChannel.onmessage = (event) => {
+    if (event.data === 'update') {
+        refreshSection();
+    }
+};
+
 function checkStatusUpdates() {
     fetch('check_status_checkbox.php', { cache: 'no-store' })
         .then(r => r.json())
@@ -28,16 +38,27 @@ function checkStatusUpdates() {
             if (lastStatusChecksum !== data.checksum) {
                 lastStatusChecksum = data.checksum;
                 refreshSection();
+
             }
+
         })
+
         .catch(console.error);
+
 }
 
+
+
 checkStatusUpdates();
-setInterval(checkStatusUpdates, 5000);
+
+setInterval(checkStatusUpdates, 500);
+
 </script>
 
+
+
 <div id="content">
+
 
 
 			<hr/>
