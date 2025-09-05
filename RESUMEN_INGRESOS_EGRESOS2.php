@@ -22,11 +22,13 @@ function refreshSection() {
 }
 
 
-
 // Escucha mensajes del controlador para recargar este resumen
 const resumenChannel = new BroadcastChannel('resumen_actualizacion');
 resumenChannel.onmessage = (event) => {
-    if (event.data === 'update') {
+    if (
+        event.data === 'update' ||
+        (event.data && event.data.type === 'PorfaltaDeFactura12')
+    ) {
         refreshSection();
     }
 };

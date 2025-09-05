@@ -2147,5 +2147,8 @@ if($database->plantilla_filtro($nombreTabla,"MONTO_TOTAL_COTIZACION_ADEUDO",$alt
 ?>
 <script>
 const resumenChannel = new BroadcastChannel('resumen_actualizacion');
-resumenChannel.postMessage('update');
+resumenChannel.postMessage({
+    type: 'PorfaltaDeFactura12',
+    value: <?php echo json_encode($PorfaltaDeFactura12); ?>
+});
 </script>
